@@ -37,6 +37,7 @@ public class ApiApplicationServiceImpl implements ApiApplicationService {
         Optional<User> user = userService.findByUsername(username);
 
         Api api = apiService.create(new Api(dto.name(), dto.url(), dto.method(), user.get()));
+
         return DisplayApiDto.from(api);
     }
 
