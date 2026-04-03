@@ -22,7 +22,7 @@ public record CheckedApiDto(
                     api.getStatus(),
                     null,
                     0,
-                    null
+                    "NULL"
             );
         } else {
             return new CheckedApiDto(

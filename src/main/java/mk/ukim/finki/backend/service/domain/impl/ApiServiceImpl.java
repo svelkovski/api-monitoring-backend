@@ -1,10 +1,12 @@
 package mk.ukim.finki.backend.service.domain.impl;
 
 import lombok.RequiredArgsConstructor;
+import mk.ukim.finki.backend.event.ApiCreatedEvent;
 import mk.ukim.finki.backend.model.domain.Api;
 import mk.ukim.finki.backend.model.exception.ApiNotFoundException;
 import mk.ukim.finki.backend.repository.ApiRepository;
 import mk.ukim.finki.backend.service.domain.ApiService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,13 @@ import org.springframework.stereotype.Service;
 public class ApiServiceImpl implements ApiService {
 
     private final ApiRepository apiRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public Api create(Api api) {
-        return apiRepository.save(api);
+        Api saved = apiRepository.save(api);
+        applicationEventPublisher.publishEvent(new ApiCreatedEvent(saved));
+        return saved;
     }
 
     @Override
