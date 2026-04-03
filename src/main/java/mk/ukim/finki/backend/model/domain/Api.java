@@ -23,6 +23,7 @@ public class Api extends BaseAuditableEntity {
     private String url;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "http_method")
     private HttpMethod method;
 
     @Column(nullable = false)
@@ -34,4 +35,12 @@ public class Api extends BaseAuditableEntity {
 
     @OneToMany(mappedBy = "api")
     private List<Checks> checks = new ArrayList<>();
+
+    public Api(String name, String url, HttpMethod method, User user) {
+        this.name = name;
+        this.url = url;
+        this.method = method;
+        this.status = "UNKNOWN";
+        this.user = user;
+    }
 }
