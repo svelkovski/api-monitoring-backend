@@ -18,20 +18,20 @@ public class Checks extends BaseEntity {
     @Column(nullable = false)
     private Long responseTime;
 
-    private int response_code;
+    private int responseCode;
 
     @Column(nullable = false)
-    private LocalDateTime checked_at;
+    private LocalDateTime checkedAt;
 
     @ManyToOne
     @JoinColumn(name = "api_id", nullable = false)
     private Api api;
 
     @Builder
-    public Checks(Long responseTime, int response_code, Api api) {
+    public Checks(Long responseTime, int responseCode, Api api) {
         this.responseTime = responseTime;
-        this.response_code = response_code;
-        this.checked_at = LocalDateTime.now();
+        this.responseCode = responseCode;
+        this.checkedAt = LocalDateTime.now();
         this.api = api;
     }
 }
