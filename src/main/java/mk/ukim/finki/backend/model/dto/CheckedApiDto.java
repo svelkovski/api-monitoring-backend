@@ -5,6 +5,7 @@ import mk.ukim.finki.backend.model.domain.Checks;
 import mk.ukim.finki.backend.model.enums.HttpMethod;
 
 public record CheckedApiDto(
+        Long id,
         String name,
         String url,
         HttpMethod method,
@@ -16,6 +17,7 @@ public record CheckedApiDto(
     public static CheckedApiDto from(Api api, Checks latestCheck) {
         if (latestCheck == null) {
             return new CheckedApiDto(
+                    api.getId(),
                     api.getName(),
                     api.getUrl(),
                     api.getMethod(),
@@ -26,6 +28,7 @@ public record CheckedApiDto(
             );
         } else {
             return new CheckedApiDto(
+                    api.getId(),
                     api.getName(),
                     api.getUrl(),
                     api.getMethod(),
