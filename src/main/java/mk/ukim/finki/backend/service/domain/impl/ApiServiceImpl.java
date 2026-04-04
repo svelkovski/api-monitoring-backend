@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class ApiServiceImpl implements ApiService {
     private final ApiRepository apiRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
 
+    @Transactional
     @Override
     public Api create(Api api) {
         Api saved = apiRepository.save(api);
