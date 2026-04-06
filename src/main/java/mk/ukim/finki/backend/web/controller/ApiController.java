@@ -34,6 +34,11 @@ public class ApiController {
         return ResponseEntity.ok(apiApplicationService.getAllApisWithStatus(page, size));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CheckedApiDto> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(apiApplicationService.getById(id));
+    }
+
     @PutMapping("/{id}/update")
     public ResponseEntity<DisplayApiDto> updateApi(@PathVariable Long id, @RequestBody @Valid CreateApiDto dto) {
         return ResponseEntity.ok(apiApplicationService.updateApi(id, dto));
