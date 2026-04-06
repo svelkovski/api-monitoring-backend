@@ -13,4 +13,6 @@ public interface ApiApplicationService {
     DisplayApiDto updateApi(Long id, CreateApiDto dto);
 
     DisplayApiDto deleteById(Long id);
+
+    CheckedApiDto getById(Long id);
 }

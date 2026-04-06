@@ -56,6 +56,22 @@ public class ApiApplicationServiceImpl implements ApiApplicationService {
     }
 
     @Override
+    public CheckedApiDto getById(Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Api api = apiService.findById(id);
+
+        if (!api.getUser().getUsername().equals(username)) {
+            throw new AccessDeniedException("Cannot view another user's API");
+        }
+
+        Checks latestCheck = checksService.getLatestCheckForApi(api);
+
+        return CheckedApiDto.from(api, latestCheck);
+    }
+
+    @Override
     public DisplayApiDto updateApi(Long id, CreateApiDto dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
