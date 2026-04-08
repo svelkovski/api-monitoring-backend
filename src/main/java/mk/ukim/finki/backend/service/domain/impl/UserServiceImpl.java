@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mk.ukim.finki.backend.model.domain.User;
 import mk.ukim.finki.backend.model.exception.IncorrectPasswordException;
 import mk.ukim.finki.backend.model.exception.UserNotFoundException;
+import mk.ukim.finki.backend.model.exception.UsernameAlreadyExistsException;
 import mk.ukim.finki.backend.repository.UserRepository;
 import mk.ukim.finki.backend.service.domain.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(String username, String email, String password) {
+        if (userRepository.existsByUsername(username)) {
+            throw new UsernameAlreadyExistsException(username);
+        }
+
         User user = User.builder()
                 .username(username)
                 .email(email)
