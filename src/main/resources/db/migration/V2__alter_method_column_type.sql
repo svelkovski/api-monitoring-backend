@@ -1,0 +1,1 @@
+alter table api alter column method type varchar(10)
