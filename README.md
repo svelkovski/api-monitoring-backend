@@ -18,4 +18,4 @@ It handles user authentication, API monitoring, storing check results, and expos
 - REST API endpoints for frontend
 
 ## Related Repos
-Frontend: https://github.com/yourorg/api-monitor-frontend
+Frontend: https://github.com/svelkovski/api-monitor-frontend
